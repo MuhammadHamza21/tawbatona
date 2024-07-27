@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "179592289544",
+    "project_id": "tawbatona",
+    "storage_bucket": "tawbatona.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179592289544:android:a0c5ae46b5e4f01aa2e0bd",
+        "android_client_info": {
+          "package_name": "com.example.tawbatona"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6O5s0-EmgIkrs8_t08d1SMtGq60IdV60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
