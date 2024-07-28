@@ -1,10 +1,13 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tawbatona/app/presentation/layout/home_layout.dart';
 import 'package:tawbatona/authentication/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:tawbatona/authentication/presentation/controller/authentication_cubit.dart';
+import 'package:tawbatona/authentication/presentation/screens/register_screen.dart';
 import 'package:tawbatona/core/utils/navigations/navigate_and_finish.dart';
+import 'package:tawbatona/core/utils/navigations/navigate_to.dart';
 import 'package:tawbatona/core/utils/text_styles/text_styles.dart';
 import 'package:tawbatona/core/widgets/app_text_button.dart';
 import 'package:tawbatona/core/widgets/app_text_form_field.dart';
@@ -144,6 +147,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
                 verticalSpacing(20),
+                Center(
+                  child: RichText(
+                      text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Don't have an account? ",
+                        style: TextStyles.font14BlackMediumGilroy(),
+                      ),
+                      TextSpan(
+                        text: "Sign Up",
+                        style: TextStyles.font14GreenSemiBoldGilroy,
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            navigateTo(
+                              context,
+                              const RegisterScreen(),
+                            );
+                          },
+                      ),
+                    ],
+                  )),
+                )
               ],
             ),
           ),

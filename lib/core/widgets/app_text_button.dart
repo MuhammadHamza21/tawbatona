@@ -32,25 +32,25 @@ class AppTextButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor:
-            MaterialStatePropertyAll(backgroundColor ?? AppColors.primaryColor),
+            WidgetStatePropertyAll(backgroundColor ?? AppColors.primaryColor),
         foregroundColor:
-            MaterialStatePropertyAll(foregroundColor ?? AppColors.whiteColor),
+            WidgetStatePropertyAll(foregroundColor ?? AppColors.whiteColor),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: MaterialStatePropertyAll(
+        minimumSize: WidgetStatePropertyAll(
           Size(double.infinity, 67.h),
         ),
-        shape: MaterialStatePropertyAll(
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(19.r),
           ),
         ),
-        padding: MaterialStatePropertyAll(
+        padding: WidgetStatePropertyAll(
           EdgeInsets.symmetric(
             horizontal: horizontalPadding?.w ?? 12.w,
             vertical: verticalPadding?.w ?? 14.h,
           ),
         ),
-        fixedSize: MaterialStatePropertyAll(
+        fixedSize: WidgetStatePropertyAll(
           Size(
             buttonWidth ?? double.infinity,
             buttonHeight ?? 50.h,

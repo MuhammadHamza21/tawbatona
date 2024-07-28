@@ -163,21 +163,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 verticalSpacing(25),
-                RichText(
-                  text: TextSpan(children: [
-                    TextSpan(
-                      text: "Already have an account? ",
-                      style: TextStyles.font14CanvasMediumGilroy(context),
-                    ),
-                    TextSpan(
-                      text: "Sign In",
-                      style: TextStyles.font14GreenSemiBoldGilroy,
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.pop(context);
-                        },
-                    ),
-                  ]),
+                Center(
+                  child: RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                        text: "Already have an account? ",
+                        style: TextStyles.font14BlackMediumGilroy(),
+                      ),
+                      TextSpan(
+                        text: "Sign In",
+                        style: TextStyles.font14GreenSemiBoldGilroy,
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pop(context);
+                          },
+                      ),
+                    ]),
+                  ),
                 ),
               ],
             ),

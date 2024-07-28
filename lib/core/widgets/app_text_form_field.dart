@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tawbatona/core/theme/colors/app_colors.dart';
 
 import 'package:tawbatona/core/utils/text_styles/text_styles.dart';
 
@@ -40,7 +41,7 @@ class AppTextFormField extends StatelessWidget {
         }
         return null;
       },
-      cursorColor: Theme.of(context).canvasColor,
+      cursorColor: AppColors.primaryColor,
       controller: controller,
       keyboardType: keyboardType,
       autofillHints: autofillHints,
@@ -56,6 +57,34 @@ class AppTextFormField extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyles.font18LighGreyMediumGilroy,
         suffixIcon: suffixIcon,
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppColors.primaryColor,
+            width: 1.3,
+          ),
+          borderRadius: BorderRadius.circular(19.r),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppColors.lightGreyColor,
+            width: 1.3,
+          ),
+          borderRadius: BorderRadius.circular(19.r),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Color.fromARGB(255, 191, 52, 42),
+            width: 1.3,
+          ),
+          borderRadius: BorderRadius.circular(19.r),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Color.fromARGB(255, 191, 52, 42),
+            width: 1.3,
+          ),
+          borderRadius: BorderRadius.circular(19.r),
+        ),
       ),
     );
   }

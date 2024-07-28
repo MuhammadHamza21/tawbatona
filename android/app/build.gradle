@@ -65,6 +65,6 @@ flutter {
     source '../..'
 }
 
-dependencies {
-    implementation("com.google.firebase:firebase-analytics")
-}
+// dependencies {
+//     implementation("com.google.firebase:firebase-analytics")
+// }

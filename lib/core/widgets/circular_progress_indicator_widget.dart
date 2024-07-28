@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tawbatona/core/theme/colors/app_colors.dart';
 
 class CircularProgressIndicatorWidget extends StatelessWidget {
   const CircularProgressIndicatorWidget({
@@ -24,7 +25,7 @@ class CircularProgressIndicatorWidget extends StatelessWidget {
             vertical: verticalPadding ?? 13.h,
             horizontal: horizontalPadding ?? 0),
         child: CircularProgressIndicator(
-          color: color,
+          color: AppColors.primaryColor,
           strokeWidth: strokeWidth ?? 4,
         ),
       ),

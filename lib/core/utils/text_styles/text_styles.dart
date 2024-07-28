@@ -12,8 +12,8 @@ class TextStyles {
     fontFamily: "Gilroy",
   );
 
-  static TextStyle font16WhiteRegularGilroyMedium = TextStyle(
-    color: AppColors.whiteColor,
+  static TextStyle font16BlackRegularGilroyMedium = TextStyle(
+    color: AppColors.blackColor,
     fontSize: 16.sp,
     fontWeight: AppFontWeights.regular,
     fontFamily: "Gilroy",
@@ -50,14 +50,21 @@ class TextStyles {
 
   static TextStyle font18CanvasMediumGilroy(BuildContext context) => TextStyle(
         fontSize: 18.sp,
-        color: Theme.of(context).canvasColor,
+        color: Colors.black,
         fontWeight: AppFontWeights.medium,
         fontFamily: "Gilroy",
       );
 
-  static TextStyle font14CanvasMediumGilroy(BuildContext context) => TextStyle(
+  static TextStyle font14BlackMediumGilroy() => TextStyle(
         fontSize: 14.sp,
-        color: Theme.of(context).canvasColor,
+        color: Colors.black,
+        fontWeight: AppFontWeights.medium,
+        fontFamily: "Gilroy",
+      );
+
+  static TextStyle font14GreyMediumGilroy() => TextStyle(
+        fontSize: 14.sp,
+        color: Colors.grey,
         fontWeight: AppFontWeights.medium,
         fontFamily: "Gilroy",
       );
@@ -65,6 +72,13 @@ class TextStyles {
   static TextStyle font14GreenSemiBoldGilroy = TextStyle(
     fontSize: 14.sp,
     color: AppColors.primaryColor,
+    fontWeight: AppFontWeights.semiBold,
+    fontFamily: "Gilroy",
+  );
+
+  static TextStyle font17RedSemiBoldGilroy = TextStyle(
+    fontSize: 17.sp,
+    color: Colors.red,
     fontWeight: AppFontWeights.semiBold,
     fontFamily: "Gilroy",
   );
@@ -97,9 +111,9 @@ class TextStyles {
         fontFamily: "Gilroy",
       );
 
-  static TextStyle font16CanvasBoldGilroy(BuildContext context) => TextStyle(
-        fontSize: 16.sp,
-        color: Theme.of(context).canvasColor,
+  static TextStyle font17BlackBoldGilroy() => TextStyle(
+        fontSize: 17.5.sp,
+        color: Colors.black,
         fontWeight: AppFontWeights.bold,
         fontFamily: "Gilroy",
       );
