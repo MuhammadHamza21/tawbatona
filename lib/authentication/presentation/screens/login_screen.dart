@@ -97,7 +97,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Theme.of(context).canvasColor,
                           ),
                         ),
-                        onFieldSubmitted: (p0) {},
+                        onFieldSubmitted: (p0) {
+                          if (formKey.currentState!.validate()) {
+                            final authCubit = AuthenticationCubit.get(context);
+                            FocusManager.instance.primaryFocus!.unfocus();
+                            authCubit.signInWithEmailAndPassword(
+                              SignInParams(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

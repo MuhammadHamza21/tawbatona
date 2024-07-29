@@ -5,12 +5,12 @@ import 'package:tawbatona/core/theme/colors/app_colors.dart';
 
 class CircularProgressIndicatorWidget extends StatelessWidget {
   const CircularProgressIndicatorWidget({
-    Key? key,
+    super.key,
     this.verticalPadding,
     this.horizontalPadding,
     this.color,
     this.strokeWidth,
-  }) : super(key: key);
+  });
 
   final double? verticalPadding;
   final double? horizontalPadding;
@@ -25,7 +25,7 @@ class CircularProgressIndicatorWidget extends StatelessWidget {
             vertical: verticalPadding ?? 13.h,
             horizontal: horizontalPadding ?? 0),
         child: CircularProgressIndicator(
-          color: AppColors.primaryColor,
+          color: color ?? AppColors.primaryColor,
           strokeWidth: strokeWidth ?? 4,
         ),
       ),

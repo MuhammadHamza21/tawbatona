@@ -1,7 +1,7 @@
 flutter_native_splash:
-  color: "#53B175"
+  color: "#FFFFFF"
   #background_image: "assets/background.png"
-  image: assets/images/nectar_1024.png
+  image: assets/images/muslim2.png
   #branding: assets/dart.png
   #branding_mode: bottom
   #color_dark: "#042a49"
@@ -10,9 +10,9 @@ flutter_native_splash:
   #branding_dark: assets/dart_dark.png
 
   android_12:
-    image: assets/images/splash12.png
-    color: "#53B175"
-    icon_background_color: "#53B175"
+    # image: assets/images/muslim2.png
+    color: "#FFFFFF"
+    icon_background_color: "#FFFFFF"
     #branding: assets/dart.png
     #image_dark: assets/android12splash-invert.png
     #color_dark: "#042a49"

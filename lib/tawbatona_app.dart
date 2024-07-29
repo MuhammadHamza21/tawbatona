@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tawbatona/app/presentation/controller/app_cubit.dart';
 import 'package:tawbatona/app/presentation/layout/home_layout.dart';
 import 'package:tawbatona/authentication/presentation/controller/authentication_cubit.dart';
 import 'package:tawbatona/authentication/presentation/screens/login_screen.dart';
@@ -17,7 +18,11 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) => sl<AuthenticationCubit>()..getCurrentUser()),
+            create: (_) => sl<AuthenticationCubit>()..getCurrentUser(),
+          ),
+          BlocProvider(
+            create: (_) => sl<AppCubit>()..getPersons(),
+          ),
         ],
         child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
           builder: (context, state) {
