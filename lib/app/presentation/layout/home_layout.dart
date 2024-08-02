@@ -4,143 +4,84 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tawbatona/app/presentation/controller/app_cubit.dart';
 import 'package:tawbatona/app/presentation/screens/add_person_screen.dart';
-import 'package:tawbatona/app/presentation/widgets/person_widget.dart';
+import 'package:tawbatona/authentication/presentation/controller/authentication_cubit.dart';
 import 'package:tawbatona/core/theme/colors/app_colors.dart';
-import 'package:tawbatona/core/utils/enums/enums.dart';
 import 'package:tawbatona/core/utils/navigations/navigate_to.dart';
 
 import 'package:tawbatona/core/utils/text_styles/text_styles.dart';
-import 'package:tawbatona/core/widgets/app_text_button.dart';
-import 'package:tawbatona/core/widgets/circular_progress_indicator_widget.dart';
-import 'package:tawbatona/core/widgets/snackbar_message.dart';
-import 'package:tawbatona/core/widgets/spacing.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white.withOpacity(0),
-        surfaceTintColor: Colors.white,
-        title: Text(
-          "Hello Mohamed",
-          style: TextStyles.font16BlackRegularGilroyMedium,
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: BlocConsumer<AppCubit, AppState>(
-          builder: (context, state) {
-            final appCubit = AppCubit.get(context);
-            if (state.gettingPersonsState == RequestState.loading) {
-              return const CircularProgressIndicatorWidget();
-            }
-            if (state.gettingPersonsState == RequestState.error) {
-              return Center(
-                child: Column(
-                  children: [
-                    Text(
-                      "Error",
-                      style: TextStyles.font16BlackRegularGilroyMedium,
-                    ),
-                    verticalSpacing(15),
-                    AppTextButton(
-                      onPressed: () {
-                        appCubit.getPersons();
-                      },
-                      title: "Try Again",
-                    ),
-                  ],
-                ),
-              );
-            }
-            if (state.gettingPersonsState == RequestState.offline) {
-              return Center(
-                child: Column(
-                  children: [
-                    Text(
-                      appCubit.gettingPersonsMessage,
-                      style: TextStyles.font16BlackRegularGilroyMedium,
-                    ),
-                    verticalSpacing(15),
-                    AppTextButton(
-                      onPressed: () {
-                        appCubit.getPersons();
-                      },
-                      title: "Try Again",
-                    ),
-                  ],
-                ),
-              );
-            }
-            if (state.gettingPersonsState == RequestState.loaded ||
-                state.gettingPersonsState == RequestState.loadMore) {
-              if (appCubit.personsList.isEmpty) {
-                return Center(
-                  child: Text(
-                    "There are no data added yet",
-                    style: TextStyles.font17BlackBoldGilroy(),
-                    maxLines: 2,
-                  ),
+    return BlocConsumer<AppCubit, AppState>(
+      builder: (context, state) {
+        final appCubit = AppCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white.withOpacity(0),
+            surfaceTintColor: Colors.white,
+            title: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+              builder: (context, state) {
+                return Text(
+                  "Hello ${AuthenticationCubit.get(context).user!.displayName!.split(" ").first}",
+                  style: TextStyles.font16BlackRegularGilroyMedium,
                 );
-              } else {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: ListView.builder(
-                    itemCount: appCubit.personsList.length,
-                    itemBuilder: (context, index) {
-                      return PersonWidget(
-                        person: appCubit.personsList[index],
-                      );
-                    },
-                  ),
-                );
-              }
-            } else {
-              return const SizedBox();
-            }
-          },
-          listener: (context, state) {
-            final appCubit = AppCubit.get(context);
-            if (state.deletingPersonsState == RequestState.loaded) {
-              appCubit.getPersons(isLoadAgain: true);
-              SnackbarMessage.showSuccessMessage(
-                  context, "Deleted Successfully");
-            }
-            if (state.deletingPersonsState == RequestState.error) {
-              SnackbarMessage.showSuccessMessage(
-                  context, "Error while deleting");
-            }
-            if (state.deletingPersonsState == RequestState.offline) {
-              SnackbarMessage.showSuccessMessage(
-                  context, appCubit.deletingPersonsMessage);
-            }
-            if (state.updatingPersonsState == RequestState.loaded) {
-              appCubit.getPersons(isLoadAgain: true);
-              SnackbarMessage.showSuccessMessage(
-                  context, "Updated Successfully");
-            }
-            if (state.updatingPersonsState == RequestState.error) {
-              SnackbarMessage.showSuccessMessage(
-                  context, "Error while updating");
-            }
-            if (state.updatingPersonsState == RequestState.offline) {
-              SnackbarMessage.showSuccessMessage(
-                  context, appCubit.updatingPersonsMessage);
-            }
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          navigateTo(context, const AddPersonScreen());
-        },
-        backgroundColor: AppColors.primaryColor,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.person_add, color: Colors.white),
-      ),
+              },
+            ),
+          ),
+          body: appCubit.screens[appCubit.currentIndex],
+          floatingActionButton: appCubit.currentIndex == 0
+              ? FloatingActionButton(
+                  onPressed: () {
+                    navigateTo(context, const AddPersonScreen());
+                  },
+                  backgroundColor: AppColors.primaryColor,
+                  shape: const CircleBorder(),
+                  child: const Icon(Icons.person_add, color: Colors.white),
+                )
+              : const SizedBox(),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: appCubit.currentIndex,
+            onTap: (value) {
+              appCubit.changeCurrentIndex(value);
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                ),
+                label: "Home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.mosque,
+                ),
+                label: "Athkar",
+              ),
+            ],
+            elevation: 8,
+            backgroundColor: AppColors.whiteColor,
+            type: BottomNavigationBarType.fixed,
+            selectedIconTheme: IconThemeData(
+              color: AppColors.primaryColor,
+              size: 25.sp,
+            ),
+            unselectedIconTheme: IconThemeData(
+              color: AppColors.blackColor,
+              size: 25.sp,
+            ),
+            unselectedLabelStyle: TextStyles.font12GreenSemiboldGilroy
+                .copyWith(color: AppColors.blackColor),
+            selectedLabelStyle: TextStyles.font12GreenSemiboldGilroy,
+            selectedItemColor: AppColors.primaryColor,
+            unselectedItemColor: AppColors.blackColor,
+            useLegacyColorScheme: true,
+          ),
+        );
+      },
+      listener: (context, state) {},
     );
   }
 }

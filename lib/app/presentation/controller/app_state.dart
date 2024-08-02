@@ -7,18 +7,21 @@ class AppState extends Equatable {
     this.deletingPersonsState = RequestState.initial,
     this.addingPersonsState = RequestState.initial,
     this.updatingPersonsState = RequestState.initial,
+    this.changingCurrentIndexState = RequestState.initial,
   });
   final RequestState gettingPersonsState;
   final RequestState deletingPersonsState;
   final RequestState addingPersonsState;
   final RequestState updatingPersonsState;
+  final RequestState changingCurrentIndexState;
 
   @override
   List<Object> get props => [
         gettingPersonsState,
         deletingPersonsState,
         addingPersonsState,
-        updatingPersonsState
+        updatingPersonsState,
+        changingCurrentIndexState,
       ];
 
   AppState copyWith({
@@ -26,12 +29,15 @@ class AppState extends Equatable {
     RequestState? deletingPersonsState,
     RequestState? addingPersonsState,
     RequestState? updatingPersonsState,
+    RequestState? changingCurrentIndexState,
   }) =>
       AppState(
         gettingPersonsState: gettingPersonsState ?? this.gettingPersonsState,
         deletingPersonsState: deletingPersonsState ?? this.deletingPersonsState,
         addingPersonsState: addingPersonsState ?? this.addingPersonsState,
         updatingPersonsState: updatingPersonsState ?? this.updatingPersonsState,
+        changingCurrentIndexState:
+            changingCurrentIndexState ?? this.changingCurrentIndexState,
       );
 }
 

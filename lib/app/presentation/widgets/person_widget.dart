@@ -92,7 +92,7 @@ class PersonWidget extends StatelessWidget {
                       style: TextStyles.font16BlackRegularGilroyMedium,
                     ),
                     TextSpan(
-                      text: person.noOfBadWords.toString(),
+                      text: person.amountToPay.toString(),
                       style: TextStyles.font17RedSemiBoldGilroy,
                     ),
                   ]),
@@ -124,6 +124,7 @@ class PersonWidget extends StatelessWidget {
                     );
                   },
                 ),
+                SizedBox(width: 15.w),
               ],
             ),
           ],

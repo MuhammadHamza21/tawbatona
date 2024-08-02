@@ -8,6 +8,8 @@ import 'package:tawbatona/app/domain/usecases/add_person.dart';
 import 'package:tawbatona/app/domain/usecases/delete_person.dart';
 import 'package:tawbatona/app/domain/usecases/get_persons.dart';
 import 'package:tawbatona/app/domain/usecases/update_person.dart';
+import 'package:tawbatona/app/presentation/screens/athkar_screen.dart';
+import 'package:tawbatona/app/presentation/screens/home_screen.dart';
 import 'package:tawbatona/core/error/failures.dart';
 import 'package:tawbatona/core/usecase/base_usecase.dart';
 import 'package:tawbatona/core/utils/enums/enums.dart';
@@ -28,6 +30,25 @@ class AppCubit extends Cubit<AppState> {
   String deletingPersonsMessage = "";
   String updatingPersonsMessage = "";
   String addingPersonsMessage = "";
+  int currentIndex = 0;
+  List<Widget> screens = [
+    const HomeScreen(),
+    const AthkarScreen(),
+  ];
+
+  void changeCurrentIndex(int index) {
+    emit(state.copyWith(changingCurrentIndexState: RequestState.loading));
+    currentIndex = index;
+    emit(state.copyWith(changingCurrentIndexState: RequestState.loaded));
+  }
+
+  int getTotalToPay() {
+    var totalToPay = 0;
+    for (var element in personsList) {
+      totalToPay += element.amountToPay;
+    }
+    return totalToPay;
+  }
 
   FutureOr<void> getPersons({bool isLoadAgain = false}) async {
     if (!isLoadAgain) {
@@ -47,6 +68,9 @@ class AppCubit extends Cubit<AppState> {
       },
       (r) {
         personsList = r;
+        personsList.sort(
+          (a, b) => b.amountToPay.compareTo(a.amountToPay),
+        );
         emit(state.copyWith(gettingPersonsState: RequestState.loaded));
       },
     );

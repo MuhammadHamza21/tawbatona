@@ -137,7 +137,8 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
                           }
                         }
                       },
-                      child: state.addingPersonsState == RequestState.loading
+                      child: state.addingPersonsState == RequestState.loading ||
+                              state.updatingPersonsState == RequestState.loading
                           ? const CircularProgressIndicatorWidget(
                               color: Colors.white,
                               verticalPadding: 0,
@@ -168,10 +169,10 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
                     }
 
                     if (state.updatingPersonsState == RequestState.loaded) {
-                      SnackbarMessage.showSuccessMessage(
-                        context,
-                        "${nameController.text.split(" ").first} has been updated successfully",
-                      );
+                      // SnackbarMessage.showSuccessMessage(
+                      //   context,
+                      //   "${nameController.text.split(" ").first} has been updated successfully",
+                      // );
                       AppCubit.get(context).getPersons();
                     } else if (state.updatingPersonsState ==
                         RequestState.error) {
